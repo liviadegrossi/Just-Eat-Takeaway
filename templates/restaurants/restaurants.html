@@ -1,0 +1,86 @@
+{% extends 'restaurants/base.html' %}
+{% load static %}
+{% block content %}
+<header class="header__elements">
+    <a href="#">
+        <img src="{% static '/assets/542076-JET-Logo-Orange-Secondary-Horizontal-Stacked-RGB-95f33b.png' %}" alt="Logo of the Just Eat Takeaway.com" class="header__jet__logo">
+    </a>
+    <form action="{% url 'search' %}" >
+        <div class="search__elements">
+            <input type="text" placeholder="Postcode" name="searchPostCode">
+            <button type="submit" class="search__button" class="search__button">
+                <span>Search</span>
+            </button>
+        </div>
+    </form>
+    <div class="header__location__elements">
+        <img src="{% static '/assets/location_on_24dp_5E5D5D.png' %}" alt="Login to your account">
+        {% if postcode %}
+            <p>{{ postcode }}</p>
+        {% endif %}
+    </div>
+</header>
+
+<main class="restaurants__main">
+    {% if error %}
+        <h1>{{ error }}</h1>
+    {% endif %}
+
+    {% if restaurants %}
+    <ul class="restaurants__container">
+        {% for restaurant in restaurants %}
+        <li class="restaurant">
+            <div>
+                {% if restaurant.logoUrl == '' or restaurant.logoUrl == null %}
+                    <img src="{% static '/assets/restaurant-logo.jpg' %}" alt="A generic image of a restaurant" class="restaurant__image">
+                {% else %}
+                    <img src="{{ restaurant.logoUrl }}" alt="Restaurant's logo" class="restaurant__image">
+                {% endif %}
+            </div>
+            <div class="restaurant__metadata">
+                <!-- <div class="restaurant__metadata__element restaurant__name"> -->
+                <h4><b>{{ restaurant.name }}</b></h4>  
+
+                <div class="restaurant__metadata__element">
+                    <img src="{% static '/assets/star_rate_16dp_FFFFFF.png' %}" alt="">
+                    <p>{{ restaurant.rating.starRating }} ({{ restaurant.rating.count }})</p>
+                </div>
+
+                <!-- </div> -->
+                <div class="restaurant__metadata__element">
+                    <img src="{% static '/assets/location_on_16dp_FFFFFF.png' %}" alt="">
+                    <p>{{ restaurant.address.firstLine }}, {{ restaurant.address.city }}</p>
+                </div> 
+
+                <div class="restaurant__metadata__element">
+                    <img src="{% static '/assets/dining_16dp_FFFFFF.png' %}" alt="">
+                    {% for cuisine in restaurant.cuisines %}
+                        <p>{{ cuisine }}, </p>
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    <!-- <div class="restaurants__cuisines">
+        <a href="#" class="restaurants__filter__cuisine">All</a>
+        <a href="#" class="restaurants__filter__cuisine">Taiwanese</a>
+        <a href="#" class="restaurants__filter__cuisine">Steak</a>
+        <a href="#" class="restaurants__filter__cuisine">Seafood</a>
+        <a href="#" class="restaurants__filter__cuisine">Pies</a>
+        <a href="#" class="restaurants__filter__cuisine">Nigerian</a>
+        <a href="#" class="restaurants__filter__cuisine">Korean</a>
+        <a href="#" class="restaurants__filter__cuisine">European</a>
+
+        {% if postcode %}
+            {% for cuisine in cuisines%}
+                <a href="#">{{ cuisine }}</a>
+            {% endfor %}
+        {% endif %} 
+    </div> -->
+    
+</main>
+{% endblock %}
