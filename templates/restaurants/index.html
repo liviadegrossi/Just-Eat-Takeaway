@@ -1,24 +1,17 @@
 {% extends 'restaurants/base.html' %}
 {% load static %}
 {% block content %}
-<header class="header__elements">
-    <a href="#">
-        <img src="{% static '/assets/542076-JET-Logo-Orange-Secondary-Horizontal-Stacked-RGB-95f33b.png' %}" alt="Logo of the Just Eat Takeaway.com" class="header__jet__logo">
-    </a>
-    <a href="#">
-        <img src="{% static '/assets/person_36dp_2C2C2C.png' %}" alt="Login to your account">
-    </a>
-</header>
 
 <main class="main__elements">
     <section>
+        <img src="{% static '/assets/542076-JET-Logo-Orange-Secondary-Horizontal-Stacked-RGB-95f33b.png' %}" alt="Logo of the Just Eat Takeaway.com" class="header__jet__logo">
         <div class="main__elements__text">
             <h1>Order food</h1>
             <h2>Search restaurants near you</h2>
         </div>
-        <form action="{% url 'search' %}" >
+        <form action="{% url 'pagination' %}" >
             <div class="search__elements">
-                <img src="{% static '/assets/search_24dp_FF8000.svg' %}" alt="Search icon">
+                <!-- <img src="{% static '/assets/search_24dp_FF8000.svg' %}" alt="Search icon"> -->
                 <input type="text" placeholder="Postcode" name="searchPostCode">
                 <button type="submit" class="search__button" class="search__button">
                     <span>Search</span>
