@@ -1,0 +1,66 @@
+{% extends 'restaurants/base.html' %}
+{% load static %}
+{% block content %}
+<header class="header__elements">
+    <a href="#">
+        <img src="{% static '/assets/542076-JET-Logo-Orange-Secondary-Horizontal-Stacked-RGB-95f33b.png' %}" alt="Logo of the Just Eat Takeaway.com" class="header__jet__logo">
+    </a>
+    <form action="{% url 'pagination' %}" >
+        <div class="search__elements">
+            <input type="text" placeholder="Postcode" name="searchPostCode">
+            <button type="submit" class="search__button" class="search__button">
+                <span>Search</span>
+            </button>
+        </div>
+    </form>
+</header>
+
+<main class="wrapper">   
+    <div class="restaurant-container">
+        {% for restaurant in page_object %}
+        <div class="restaurant">
+            {% if restaurant.logoUrl == '' or restaurant.logoUrl == null %}
+                <img src="{% static '/assets/restaurant-logo.jpg' %}" alt="A generic image of a restaurant" class="restaurant-image">
+            {% else %}
+                <img src="{{ restaurant.logoUrl }}" alt="Restaurant's logo" class="restaurant-image">
+            {% endif %}
+            <div class="restaurant-metadata">
+                <h3>{{ restaurant.name }}</h3> 
+                <div class="restaurant-metadata-element">
+                    <img src="{% static '/assets/star_16dp_FFFFFF_FILL1.svg' %}" width="3%" height="3%"> 
+                    <span>{{ restaurant.rating.starRating }} ({{ restaurant.rating.count }})</span>
+                    <p><b> | </b></p>
+                    <img src="{% static '/assets/restaurant_16dp_FFFFFF_FILL1.svg' %}" width="3%" height="3%">
+                    <p><b> | </b></p><br>
+                    <img src="{% static '/assets/location_on_16dp_FFFFFF_FILL1.svg' %}" width="3%" height="3%">
+                    <span>{{ restaurant.address.firstLine }}, {{ restaurant.address.city }}</span>
+                </div> 
+                <div class="restaurant-metadata-element">
+                    <img src="{% static '/assets/location_on_16dp_FFFFFF_FILL1.svg' %}" width="3%" height="3%">
+                    <span>{{ restaurant.address.firstLine }}, {{ restaurant.address.city }}</span>
+                </div>
+                <div class="restaurant-metadata-element">
+                    <img src="{% static '/assets/restaurant_16dp_FFFFFF_FILL1.svg' %}" width="3%" height="3%">
+                </div> 
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!--PAGINATION-->
+    <div class="pagination">
+        {% if page_object.has_previous %}
+            <a href="?searchPostCode={{ postcode }}&page=1">First</a>
+            <a href="?searchPostCode={{ postcode }}&page={{ page_object.previous_page_number }}">{{ page_object.previous_page_number }}</a>
+        {% endif %}
+
+        <a href="?searchPostCode={{ postcode }}&page={{ page_object.number }}" >{{ page_object.number }}</a>
+            
+        {% if page_object.has_next %}
+            <a href="?searchPostCode={{ postcode }}&page={{ page_object.next_page_number }}">{{ page_object.next_page_number }}</a>
+            <a href="?searchPostCode={{ postcode }}&page={{ page_object.paginator.num_pages }}">Last</a>
+        {% endif %}
+     
+    </div>
+</main>
+{% endblock %}
