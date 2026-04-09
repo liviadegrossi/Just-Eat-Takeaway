@@ -88,6 +88,8 @@ def search_by_postcode(request):
     
     if 'searchPostCode' in request.GET:
 
+        print(request)
+
         # retrieve the postcode send in the search
         postcode = request.GET['searchPostCode']
 
@@ -101,7 +103,7 @@ def search_by_postcode(request):
 
         # whether the list of restaurants does not exist
         if restaurants is None:
-
+      
             jet_api_url = f'https://uk.api.just-eat.io/discovery/uk/restaurants/enriched/bypostcode/{postcode}'
 
             # try to obtain a list of all restaurants available according to the postcode
@@ -117,7 +119,7 @@ def search_by_postcode(request):
                 }
                 
                 response = requests.get(jet_api_url, headers=headers)
-
+                
                 # the request was unsuccessful
                 if response.status_code != 200:
                     print('No restaurants are available in the area')
