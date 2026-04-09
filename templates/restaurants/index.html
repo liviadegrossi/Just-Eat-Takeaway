@@ -2,22 +2,22 @@
 {% load static %}
 {% block content %}
 
-<main class="main__elements">
-    <section>
-        <img src="{% static '/assets/542076-JET-Logo-Orange-Secondary-Horizontal-Stacked-RGB-95f33b.png' %}" alt="Logo of the Just Eat Takeaway.com" class="header__jet__logo">
-        <div class="main__elements__text">
-            <h1>Order food</h1>
-            <h2>Search restaurants near you</h2>
+<main class="main-elements">
+    <img src="{% static '/assets/542076-JET-Logo-Orange-Secondary-Horizontal-Stacked-RGB-95f33b.png' %}" 
+        alt="Logo of the Just Eat Takeaway.com">
+    <div>
+        <div>
+            <h2>Order food</h2>
+            <h3>Search restaurants near you</h3>
         </div>
         <form action="{% url 'pagination' %}" >
-            <div class="search__elements">
-                <!-- <img src="{% static '/assets/search_24dp_FF8000.svg' %}" alt="Search icon"> -->
+            <div class="search-elements">
+                <img src="{% static '/assets/search_16dp_FF8000_FILL0.svg' %}" alt="Search icon">
                 <input type="text" placeholder="Postcode" name="searchPostCode">
-                <button type="submit" class="search__button" class="search__button">
-                    <span>Search</span>
-                </button>
+                <button type="submit"><span>Search</span></button>
             </div>
         </form>
-    </section>
+    </div>
+    
 </main>
 {% endblock %}
