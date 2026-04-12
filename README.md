@@ -17,8 +17,13 @@ Considering the previous instructions, the following requirements were derived:
 5. The system must return the first 10 restaurants from the API response.
 6. The system must display the filtered restaurant data to the user.
 
+
+### Assumptions
 **Assumption:** the system must display only 10 restaurant data at a time. Nevertheless, if the user decides, he/she could explore another 10 restaurant data. 
 
+**Assumption:** a resturant does not include the cuisines: "Deals", "Collect stamps", "Alcohol", "Beauty", "Electronics", "Local Legends", "Pharmacy", "All Night Alcohol", "Groceries", "£8 off", "Your favourites", "Meal deal", "Cheeky Tuesday", "Shops"
+
+### Improvements
 **Improvement 1:** The system must include pagination and provide only 10 restaurant data at a time.
 
 **Improvement 2:** To avoid too many requests, the API response must be cached. For each postcode, the API response is cached for 5 minutes.
